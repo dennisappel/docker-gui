@@ -1,0 +1,28 @@
+{
+  "transaction": "SE80",
+  "program": "ZSS18_201_UEBG6_A5",
+  "inputs": [
+	  [
+	{
+		"type": "key",
+		"input": "up",
+		"reps": 1
+	},
+	{
+		"type": "select",
+		"input": "down",
+		"option": 3
+	},
+	{
+		"type": "text",
+		"input": "5"
+	},
+	{
+		"type": "text",
+		"input": "10"
+	}
+     ]
+  ],
+  "result": "",
+  "expected": ""
+}
