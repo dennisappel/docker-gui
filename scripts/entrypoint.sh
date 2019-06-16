@@ -25,8 +25,11 @@ until xdotool search --name R87 >/dev/null 2>&1; do
 	sleep 1
 done
 
-/scripts/monitoring.sh &
-sleep 1
+if [ "$MONITORING" = true ]; then
+	echo "Starting monitoring daemon"
+	/scripts/monitoring.sh &
+	sleep 1
+fi
 
 echo "Setting trust level..."
 xdotool key "Tab"

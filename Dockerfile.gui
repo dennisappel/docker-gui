@@ -1,0 +1,15 @@
+FROM ubuntu AS base
+
+RUN 	apt-get update && \
+	apt-get install -y software-properties-common && \
+	apt-get install -y xvfb \
+	dbus-x11 \
+	x11-utils \
+	libswt-gtk-3-java \
+	ca-certificates \
+	xdotool \
+	xclip \
+	openbox \
+	scrot && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

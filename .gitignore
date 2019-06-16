@@ -3,4 +3,6 @@ transaction*
 screen.png
 result.json
 *.JAR
+*.tar.gz
 credentials.sh
+variables.sh

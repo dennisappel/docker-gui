@@ -1,30 +1,39 @@
 #!/bin/bash
 
-CRED_FILE="$1"
-
 HOSTDIR=$(pwd)
 WORKDIR="/results"
-
-eog screen.png &
-EOG=$!
-
 BIN_DIR="/gui"
 
-BIN=""
-CONN=""
-CLNT=""
-USER=""
-PASS=""
-LANG=""
-GUI_ARGS=""
+CRED_FILE=""
+MONITORING=false
+
+print_usage() {
+  printf "Usage: ..."
+}
+
+while getopts 'mf:' flag; do
+  case "${flag}" in
+    m) MONITORING=true ;;
+    f) CRED_FILE="${OPTARG}" ;;
+    *) print_usage
+       exit 1 ;;
+  esac
+done
 
 if [ -f "$CRED_FILE" ]; then
   source "$CRED_FILE"
+else
+  exit 1
+fi
+
+GUI_ARGS="$CONN&$CLNT&$USER&$PASS&$LANG"
+
+if [ "$MONITORING" = true ]; then
+eog screen.png &
 fi
 
 docker run --rm  \
+  -e MONITORING="$MONITORING" \
   -e GUI_ARGS="$GUI_ARGS" \
-  -e BIN_DIR="$BIN_DIR" \
   -e BIN="$BIN" \
-  -v $HOSTDIR:$WORKDIR sap-test
-
+  -v $HOSTDIR:$WORKDIR sap-gui
